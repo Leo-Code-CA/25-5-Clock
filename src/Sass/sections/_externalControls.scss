@@ -1,0 +1,21 @@
+.clock {
+
+    &__externalControls {
+        // border: 1px solid;
+        position: absolute;
+        top: 0;
+        left: 95%;
+        width: 25%;
+        height: 10%;
+        transform: translate(-95%, -100%);
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            border: 1px solid;
+            background: none;
+            width: 45%;
+            cursor: pointer;
+        }
+    }
+}

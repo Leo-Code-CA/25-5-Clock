@@ -1,0 +1,33 @@
+// GLOBAL APP SETTINGS
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+// GLOBAL RADIO CLOCK SETTINGS
+.clock {
+    border: 1px solid;
+    position: relative;
+    height: 55%;
+    aspect-ratio: 2 / 1;
+    margin-bottom: 3rem;
+    border-radius: 1rem;
+    display: flex;
+}
+
+// VARIABLES
+

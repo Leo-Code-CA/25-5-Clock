@@ -48,27 +48,63 @@ main {
   border: 1px solid;
   height: 100%;
   width: 40%;
-  padding: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .clock__switchContainer {
   display: flex;
   width: 100%;
-  height: 30%;
+  height: 25%;
+  gap: 0.5rem;
 }
 .clock__switch {
   border: 1px solid;
   width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.clock__switch h2 {
+  text-align: center;
+}
+.clock__switch div {
+  border: 1px solid;
+  flex-grow: 1;
+  height: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+.clock__switch div button {
+  width: 50%;
+  height: 100%;
+  border: 1px solid;
+}
+.clock__on--on {
+  background-color: goldenrod;
+}
+.clock__on--off {
+  background-color: turquoise;
+}
+.clock__onOffBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-grow: 1;
 }
 .clock__lengthContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70%;
+  height: 75%;
+  gap: 0.5rem;
 }
 .clock__length {
+  border: 1px solid;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.7rem;
 }
 .clock__smallScreenContainer {
   border: 1px solid;
@@ -76,18 +112,80 @@ main {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
 }
 .clock__smallScreenContainer button {
-  max-height: 20%;
+  background-color: transparent;
+  border: 1px solid;
+  width: 13%;
+  aspect-ratio: 1/1;
 }
 .clock__smallScreen {
   border: 1px solid;
   width: 100%;
-  max-height: 60%;
+  height: 50%;
+  background-color: black;
 }
 
 .clock__screenAndStations {
   height: 100%;
   width: 60%;
-  padding: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.clock__mainScreenContainer {
+  border: 1px solid;
+  width: 100%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+}
+.clock__mainScreen {
+  border: 1px solid;
+  height: 70%;
+  width: 100%;
+  background-color: black;
+}
+.clock__mainDisplay {
+  border: 1px solid;
+  width: 100%;
+  height: 70%;
+}
+.clock__secondaryDisplay {
+  width: 100%;
+  height: 30%;
+}
+.clock__stationsContainer {
+  border: 1px solid;
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.clock__stationsOverview {
+  border: 1px solid;
+  height: 40%;
+  background-image: url("./../assets/radio_stations_illustration.jpg");
+  background-size: 100% 100%;
+}
+.clock__stationsCursorContainer {
+  border: 1px solid;
+  height: 5%;
+  display: flex;
+  align-items: center;
+}
+.clock__stationsCursor {
+  height: 1.5rem;
+  width: 0.5rem;
+  background-color: black;
+}
+.clock__stationOverviewIndicator {
+  height: 100%;
+  width: 0;
+  border: 2px solid red;
+  margin: 0 auto;
 }/*# sourceMappingURL=main.css.map */

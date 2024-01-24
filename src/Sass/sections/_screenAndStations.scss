@@ -1,9 +1,78 @@
 .clock {
 
+    // SCREEN
+
     &__screenAndStations {
         // border: 1px solid;
         height: 100%;
         width: 60%;
-        padding: 1rem;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__mainScreenContainer {
+        border: 1px solid;
+        width: 100%;
+        height: 65%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__mainScreen {
+        border: 1px solid;
+        height: 70%;
+        width: 100%;
+        background-color: black;
+    }
+
+    &__mainDisplay {
+        border: 1px solid;
+        width: 100%;
+        height: 70%;
+    }
+
+    &__secondaryDisplay {
+        width: 100%;
+        height: 30%;
+    }
+
+    // STATIONS
+
+    &__stationsContainer {
+        border: 1px solid;
+        width: 100%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    &__stationsOverview {
+        border: 1px solid;
+        height: 40%;
+        background-image: url('./../assets/radio_stations_illustration.jpg');
+        background-size: 100% 100%;
+    }
+
+    &__stationsCursorContainer {
+        border: 1px solid;
+        height: 5%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__stationsCursor {
+        height: 1.5rem;
+        width: 0.5rem;
+        background-color: black;
+    }
+
+    &__stationOverviewIndicator {
+        height: 100%;
+        width: 0;
+        border: 2px solid red;
+        margin: 0 auto;
     }
 }

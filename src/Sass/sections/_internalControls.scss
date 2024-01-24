@@ -26,31 +26,40 @@
         h2 {
             text-align: center;
         }
+    }
 
-        div {
-            border: 1px solid;
-            flex-grow: 1;
-            height: 40%;
-            display: flex;
+    &__onContainer {
+        border: 1px solid;
+        flex-grow: 1;
+        height: 40%;
+        display: flex;
+
+        &--on {
+            justify-content: flex-start;
+
+        }
+
+        &--off {
             justify-content: flex-end;
 
-            button {
-                width: 50%;
-                height: 100%;
-                border: 1px solid;
-            }
         }
     }
 
-    // make that cleaner please
+    &__on {
+        width: 50%;
+        height: 100%;
+        border: 1px solid;
+        cursor: pointer;
 
-    &__on--on {
-        background-color: goldenrod;
+        &--on {
+            background-color: goldenrod;
+        }
+
+        &--off {
+            background-color: turquoise;
+        }
     }
 
-    &__on--off {
-        background-color: turquoise;
-    }
 
     &__onOffBtn {
         display: flex;

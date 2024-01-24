@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-
 export default function InternalControls({ clockOn, setClockOn }) {
 
     return (
@@ -25,10 +24,10 @@ function Switch({ children, clockOn, setClockOn }) {
             <h2>{children}</h2>
             <div className="clock__onOffBtn">
                 <span>ON</span>
-                <div>
+                <div className={clockOn ? "clock__onContainer clock__onContainer--on" : "clock__onContainer clock__onContainer--off"}>
                     <button
                     onClick={() => setClockOn(prev => !prev)}
-                    className={clockOn ? "clock__on--on" : "clock__on--off"}
+                    className={clockOn ? "clock__on clock__on--on" : "clock__on clock__on--off"}
                     ></button>
                 </div>
                 <span>OFF</span>

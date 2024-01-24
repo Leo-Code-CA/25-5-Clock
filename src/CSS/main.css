@@ -68,17 +68,23 @@ main {
 .clock__switch h2 {
   text-align: center;
 }
-.clock__switch div {
+.clock__onContainer {
   border: 1px solid;
   flex-grow: 1;
   height: 40%;
   display: flex;
+}
+.clock__onContainer--on {
+  justify-content: flex-start;
+}
+.clock__onContainer--off {
   justify-content: flex-end;
 }
-.clock__switch div button {
+.clock__on {
   width: 50%;
   height: 100%;
   border: 1px solid;
+  cursor: pointer;
 }
 .clock__on--on {
   background-color: goldenrod;
@@ -147,6 +153,7 @@ main {
   height: 70%;
   width: 100%;
   background-color: black;
+  color: white;
 }
 .clock__mainDisplay {
   border: 1px solid;

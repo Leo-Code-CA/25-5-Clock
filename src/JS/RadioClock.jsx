@@ -16,7 +16,7 @@ export default function RadioClock() {
             <ExternalControls />
             <InternalControls setClockOn={setClockOn} clockOn={clockOn}/>
             <div className="clock__screenAndStations">
-                <MainScreen />
+                <MainScreen clockOn={clockOn}/>
                 <Stations />
             </div>
         </div>

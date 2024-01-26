@@ -17,6 +17,10 @@ main {
   align-items: flex-end;
 }
 
+button {
+  cursor: pointer;
+}
+
 .clock {
   border: 1px solid;
   position: relative;
@@ -86,12 +90,6 @@ main {
   border: 1px solid;
   cursor: pointer;
 }
-.clock__on--on {
-  background-color: goldenrod;
-}
-.clock__on--off {
-  background-color: turquoise;
-}
 .clock__onOffBtn {
   display: flex;
   align-items: center;
@@ -132,6 +130,7 @@ main {
   width: 100%;
   height: 50%;
   background-color: black;
+  color: white;
 }
 
 .clock__screenAndStations {

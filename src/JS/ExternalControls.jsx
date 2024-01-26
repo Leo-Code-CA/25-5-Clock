@@ -1,4 +1,4 @@
-export default function ExternalControls() {
+export default function ExternalControls({ timerOn, setSession }) {
 
     return (
         <div className="clock__externalControls">
@@ -12,7 +12,10 @@ function Button({ children }) {
 
     return (
         <>
-            <button>{children}</button>
+            <button
+            id={children === "START" ? "start_stop" : "reset"}>
+                {children}
+            </button>
         </>
     )
 }

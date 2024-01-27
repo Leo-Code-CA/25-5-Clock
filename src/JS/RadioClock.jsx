@@ -6,10 +6,11 @@ import { useState } from 'react';
 
 export default function RadioClock() {
 
-    const [clockOn, setClockOn] = useState(false);
     const [time, setTime] = useState("");
+    const [start, setStart] = useState(true);
+    const [clockOn, setClockOn] = useState(false);
     const [timerOn, setTimerOn] = useState(false);
-    const [session, setSession] = useState({initialTimer: 25, initialBreak: 5, currentTimer: "00:15", currentBreak: "00:10", ongoing: ""})
+    const [session, setSession] = useState({initialTimer: "00:10", initialBreak: "00:05", currentTimer: "00:10", currentBreak: "00:05", ongoing: ""})
 
     return (
         <div className="clock">
@@ -17,6 +18,9 @@ export default function RadioClock() {
             <ExternalControls 
             timerOn={timerOn}
             setSession={setSession}
+            session={session}
+            start={start}
+            setStart={setStart}
             />
 
             <InternalControls 
@@ -36,6 +40,7 @@ export default function RadioClock() {
                 timerOn={timerOn}
                 session={session}
                 setSession={setSession}
+                start={start}
                 />
 
                 <Stations />

@@ -10,26 +10,33 @@ export default function RadioClock() {
     const [start, setStart] = useState(true);
     const [clockOn, setClockOn] = useState(false);
     const [timerOn, setTimerOn] = useState(false);
-    const [session, setSession] = useState({initialTimer: "00:10", initialBreak: "00:05", currentTimer: "00:10", currentBreak: "00:05", ongoing: ""})
+    // const [session, setSession] = useState({initialTimer: "00:10", initialBreak: "00:05", currentTimer: "00:10", currentBreak: "00:05", ongoing: ""})
+    const [timerBreak, setTimerBreak] = useState({initial: "00:10", current: ""});
+    const [timerSession, setTimerSession] = useState({initial: "00:05", current: ""});
+
 
     return (
         <div className="clock">
 
             <ExternalControls 
             timerOn={timerOn}
-            setSession={setSession}
-            session={session}
+            // setSession={setSession}
+            // session={session}
             start={start}
             setStart={setStart}
+            timerBreak={timerBreak}
+            setTimerBreak={setTimerBreak}
+            timerSession={timerSession}
+            setTimerSession={setTimerSession}
             />
 
             <InternalControls 
             setClockOn={setClockOn} 
             clockOn={clockOn}
             timerOn={timerOn}
-            setTimerOn={setTimerOn}
-            session={session}
-            setSession={setSession}/>
+            setTimerOn={setTimerOn}/>
+            {/* session={session}
+            setSession={setSession} */}
 
             <div className="clock__screenAndStations">
                 
@@ -38,8 +45,10 @@ export default function RadioClock() {
                 setTime={setTime} 
                 clockOn={clockOn}
                 timerOn={timerOn}
-                session={session}
-                setSession={setSession}
+                timerSession={timerSession}
+                timerBreak={timerBreak}
+                // session={session}
+                // setSession={setSession}
                 start={start}
                 />
 

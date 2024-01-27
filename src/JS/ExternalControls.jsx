@@ -1,94 +1,60 @@
 import { useRef } from "react";
 
-export default function ExternalControls({ timerOn, setSession, session, setStart, start }) {
+export default function ExternalControls({ timerOn, setStart, start, timerBreak, setTimerBreak, timerSession, setTimerSession }) {
     
     const timerIntervalID = useRef(null);
 
+
     function handleStartStop() {
-
-        setStart(s => !s);
-
 
             clearInterval(timerIntervalID.current);
 
-            const sessionCurrentTime = session.currentTimer;
-            const breakCurrentTime = session.currentBreak;
-            const sessionInitialTime = session.initialTimer;
-            const breakInitialTime = session.initialBreak;
-  
-            let ongoingTimer = sessionCurrentTime;
-            let minutes = Number(ongoingTimer.slice(0, 2));
-            let seconds = Number(ongoingTimer.slice(3, 5));
+            let inProgress = timerSession.initial;
+            let minutes = inProgress.slice(0, 2);
+            let seconds = inProgress.slice(3, 5);
 
-            console.log("outside")
-            console.log(`Current Session time is ${sessionCurrentTime}`);
-            console.log(`Current Break time is ${breakCurrentTime}`);
-            console.log(`Initial Session time is ${sessionInitialTime}`);
-            console.log(`Initial Break time is ${breakInitialTime}`);
+            console.log(minutes, seconds)
             
-            timerIntervalID.current = setInterval(() => {
-
-                if (start) {
-        
+        timerIntervalID.current = setInterval(() => {
                         
-                if (seconds === "00" && minutes === "00") {
+            if (seconds === "00" && minutes === "00") {
 
-                    console.log("ZERO")
-                    console.log(ongoingTimer === sessionCurrentTime, ongoingTimer, sessionCurrentTime)
-                            // ring bell
-                            setSession({...session, currentBreak: breakInitialTime});
-                            setSession({...session, currentTimer: sessionInitialTime});
+                inProgress === timerSession.initial ? inProgress = timerBreak.initial : inProgress = timerSession.initial;
 
-                            if (ongoingTimer === sessionCurrentTime) {
-
-                                ongoingTimer = breakInitialTime;
-                                console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
-                                setSession({...session, currentBreak: breakInitialTime});
+                inProgress === timerSession.initial ? setTimerSession({...timerSession, current: ""})
+                : setTimerBreak({...timerSession, current: ""});
 
 
-                            } else {
 
-                                ongoingTimer = sessionInitialTime;
-                                console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
-                                setSession({...session, currentTimer: sessionInitialTime});
+                minutes = inProgress.slice(0, 2);
+                seconds = inProgress.slice(3, 5);
 
-
-                            }
-                    
-                    // ongoingTimer === sessionCurrentTime ? ongoingTimer = breakInitialTime : ongoingTimer = sessionInitialTime;
-
+        
+        
+            } else if (seconds === "00") {
+        
+                minutes--;
+                seconds = 59;
     
-                    minutes = Number(ongoingTimer.slice(0, 2));
-                    seconds = Number(ongoingTimer.slice(3, 5));
-                    // console.log(minutes, seconds);
-        
-        
-                } else if (seconds === "00") {
-        
-                    minutes--;
-                    seconds = 59;
-    
-                } else {
+            } else {
         
            
-                    seconds--;
+                seconds--;
+                console.log(seconds)
         
-                }
-        
-                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
-                seconds.toString().length === 1 ? seconds = "0" + seconds : null;
-  
-        
-                console.log(ongoingTimer === sessionCurrentTime);
-        
-                ongoingTimer === sessionCurrentTime ? 
-                setSession({...session, currentTimer: `${minutes}:${seconds}`, ongoing: "Session"})
-                : setSession({...session, currentBreak: `${minutes}:${seconds}`, ongoing: "Break"})
-
             }
+        
+            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+            seconds.toString().length === 1 ? seconds = "0" + seconds : null;
+
+            
+
+            inProgress === timerSession.initial ? setTimerSession({...timerSession, current: `${minutes}:${seconds}`})
+            : setTimerBreak({...timerSession, current: `${minutes}:${seconds}`});
+
                             
         
-                }, 1000)
+            }, 1000)
 
     }
 
@@ -123,91 +89,91 @@ function Button({ children, trigger }) {
 
 
 
-function handleStartStop() {
+// function handleStartStop() {
 
-    setStart(s => !s);
+//     setStart(s => !s);
 
 
-        clearInterval(timerIntervalID.current);
+//         clearInterval(timerIntervalID.current);
 
-        const sessionCurrentTime = session.currentTimer;
-        const breakCurrentTime = session.currentBreak;
-        const sessionInitialTime = session.initialTimer;
-        const breakInitialTime = session.initialBreak;
+//         const sessionCurrentTime = session.currentTimer;
+//         const breakCurrentTime = session.currentBreak;
+//         const sessionInitialTime = session.initialTimer;
+//         const breakInitialTime = session.initialBreak;
 
-        let ongoingTimer = sessionCurrentTime;
-        let minutes = Number(ongoingTimer.slice(0, 2));
-        let seconds = Number(ongoingTimer.slice(3, 5));
+//         let ongoingTimer = sessionCurrentTime;
+//         let minutes = Number(ongoingTimer.slice(0, 2));
+//         let seconds = Number(ongoingTimer.slice(3, 5));
 
-        console.log("outside")
-        console.log(`Current Session time is ${sessionCurrentTime}`);
-        console.log(`Current Break time is ${breakCurrentTime}`);
-        console.log(`Initial Session time is ${sessionInitialTime}`);
-        console.log(`Initial Break time is ${breakInitialTime}`);
+//         console.log("outside")
+//         console.log(`Current Session time is ${sessionCurrentTime}`);
+//         console.log(`Current Break time is ${breakCurrentTime}`);
+//         console.log(`Initial Session time is ${sessionInitialTime}`);
+//         console.log(`Initial Break time is ${breakInitialTime}`);
         
-        timerIntervalID.current = setInterval(() => {
+//         timerIntervalID.current = setInterval(() => {
 
-            if (start) {
+//             if (start) {
     
                     
-            if (seconds === "00" && minutes === "00") {
+//             if (seconds === "00" && minutes === "00") {
 
-                console.log("ZERO")
-                console.log(ongoingTimer === sessionCurrentTime, ongoingTimer, sessionCurrentTime)
-                        // ring bell
-                        setSession({...session, currentBreak: breakInitialTime});
-                        setSession({...session, currentTimer: sessionInitialTime});
+//                 console.log("ZERO")
+//                 console.log(ongoingTimer === sessionCurrentTime, ongoingTimer, sessionCurrentTime)
+//                         // ring bell
+//                         setSession({...session, currentBreak: breakInitialTime});
+//                         setSession({...session, currentTimer: sessionInitialTime});
 
-                        if (ongoingTimer === sessionCurrentTime) {
+//                         if (ongoingTimer === sessionCurrentTime) {
 
-                            ongoingTimer = breakInitialTime;
-                            console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
-                            setSession({...session, currentBreak: breakInitialTime});
-
-
-                        } else {
-
-                            ongoingTimer = sessionInitialTime;
-                            console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
-                            setSession({...session, currentTimer: sessionInitialTime});
+//                             ongoingTimer = breakInitialTime;
+//                             console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
+//                             setSession({...session, currentBreak: breakInitialTime});
 
 
-                        }
+//                         } else {
+
+//                             ongoingTimer = sessionInitialTime;
+//                             console.log(`reinitialized, ongoingtimer is ${ongoingTimer}`)
+//                             setSession({...session, currentTimer: sessionInitialTime});
+
+
+//                         }
                 
-                // ongoingTimer === sessionCurrentTime ? ongoingTimer = breakInitialTime : ongoingTimer = sessionInitialTime;
+//                 // ongoingTimer === sessionCurrentTime ? ongoingTimer = breakInitialTime : ongoingTimer = sessionInitialTime;
 
 
-                minutes = Number(ongoingTimer.slice(0, 2));
-                seconds = Number(ongoingTimer.slice(3, 5));
-                // console.log(minutes, seconds);
+//                 minutes = Number(ongoingTimer.slice(0, 2));
+//                 seconds = Number(ongoingTimer.slice(3, 5));
+//                 // console.log(minutes, seconds);
     
     
-            } else if (seconds === "00") {
+//             } else if (seconds === "00") {
     
-                minutes--;
-                seconds = 59;
+//                 minutes--;
+//                 seconds = 59;
 
-            } else {
+//             } else {
     
        
-                seconds--;
+//                 seconds--;
     
-            }
+//             }
     
-            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
-            seconds.toString().length === 1 ? seconds = "0" + seconds : null;
+//             minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+//             seconds.toString().length === 1 ? seconds = "0" + seconds : null;
 
     
-            console.log(ongoingTimer === sessionCurrentTime);
+//             console.log(ongoingTimer === sessionCurrentTime);
     
-            ongoingTimer === sessionCurrentTime ? 
-            setSession({...session, currentTimer: `${minutes}:${seconds}`, ongoing: "Session"})
-            : setSession({...session, currentBreak: `${minutes}:${seconds}`, ongoing: "Break"})
+//             ongoingTimer === sessionCurrentTime ? 
+//             setSession({...session, currentTimer: `${minutes}:${seconds}`, ongoing: "Session"})
+//             : setSession({...session, currentBreak: `${minutes}:${seconds}`, ongoing: "Break"})
 
-        }
+//         }
                         
     
-            }, 1000)
+//             }, 1000)
 
-}
+// }
 

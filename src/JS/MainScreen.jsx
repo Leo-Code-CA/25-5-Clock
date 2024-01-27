@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function MainScreen({ clockOn, timerOn, session, setSession, time, setTime, start }) {
+export default function MainScreen({ clockOn, timerOn, session, setSession, time, setTime, start, timerBreak, timerSession }) {
 
     const clockIntervalID = useRef(null);
     const timerIntervalID = useRef(null);
@@ -109,10 +109,11 @@ export default function MainScreen({ clockOn, timerOn, session, setSession, time
         <div className="clock__mainScreenContainer">
             <div className="clock__mainScreen">
                 <div className="clock__secondaryDisplay" id="timer-label">
-                    {timerOn && session.ongoing}
+                    {/* {timerOn && session.ongoing} */}
                 </div>
                 <div className="clock__mainDisplay" id={timerOn ? "time-left" : undefined}>
-                    {clockOn ? time : timerOn ? (session.ongoing === "Break" ? session.currentBreak : session.currentTimer) : null}
+                    {/* {clockOn ? time : timerOn ? (session.ongoing === "Break" ? session.currentBreak : session.currentTimer) : null} */}
+                    {timerBreak.current}{timerSession.current}
                 </div>
             </div>
         </div>

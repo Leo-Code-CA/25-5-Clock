@@ -4,6 +4,8 @@ export default function ExternalControls({ timerOn, setStart, start, timerBreak,
     
     const timerIntervalID = useRef(null);
 
+    console.log(timerBreak, timerSession)
+
 
     function handleStartStop() {
 
@@ -19,15 +21,21 @@ export default function ExternalControls({ timerOn, setStart, start, timerBreak,
                         
             if (seconds === "00" && minutes === "00") {
 
+                console.log(inProgress === timerSession.initial)
+
                 inProgress === timerSession.initial ? inProgress = timerBreak.initial : inProgress = timerSession.initial;
 
-                inProgress === timerSession.initial ? setTimerSession({...timerSession, current: ""})
-                : setTimerBreak({...timerSession, current: ""});
+                console.log(inProgress === timerSession.initial)
+
+                inProgress === timerSession.initial ? setTimerBreak({...timerBreak, current: ""})
+                : setTimerSession({...timerSession, current: ""});
 
 
 
                 minutes = inProgress.slice(0, 2);
                 seconds = inProgress.slice(3, 5);
+
+                return;
 
         
         
@@ -35,22 +43,30 @@ export default function ExternalControls({ timerOn, setStart, start, timerBreak,
         
                 minutes--;
                 seconds = 59;
+
+                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+                seconds.toString().length === 1 ? seconds = "0" + seconds : null;
+    
+                
+    
+                inProgress === timerSession.initial ? setTimerSession({...timerSession, current: `${minutes}:${seconds}`})
+                : setTimerBreak({...timerSession, current: `${minutes}:${seconds}`});
     
             } else {
         
            
                 seconds--;
                 console.log(seconds)
+
+                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+                seconds.toString().length === 1 ? seconds = "0" + seconds : null;
+    
+                
+    
+                inProgress === timerSession.initial ? setTimerSession({...timerSession, current: `${minutes}:${seconds}`})
+                : setTimerBreak({...timerSession, current: `${minutes}:${seconds}`});
         
             }
-        
-            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
-            seconds.toString().length === 1 ? seconds = "0" + seconds : null;
-
-            
-
-            inProgress === timerSession.initial ? setTimerSession({...timerSession, current: `${minutes}:${seconds}`})
-            : setTimerBreak({...timerSession, current: `${minutes}:${seconds}`});
 
                             
         

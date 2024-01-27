@@ -113,7 +113,7 @@ export default function MainScreen({ clockOn, timerOn, session, setSession, time
                 </div>
                 <div className="clock__mainDisplay" id={timerOn ? "time-left" : undefined}>
                     {/* {clockOn ? time : timerOn ? (session.ongoing === "Break" ? session.currentBreak : session.currentTimer) : null} */}
-                    {timerBreak.current}{timerSession.current}
+                    {`${timerBreak.current} ${timerSession.current}`}
                 </div>
             </div>
         </div>

@@ -178,6 +178,12 @@ button {
   background-image: url("./../assets/radio_stations_illustration.jpg");
   background-size: 100% 100%;
 }
+.clock__stationOverviewIndicator {
+  height: 100%;
+  width: 0;
+  border: 2px solid red;
+  position: relative;
+}
 .clock__stationsCursorContainer {
   border: 1px solid;
   height: 5%;
@@ -188,10 +194,6 @@ button {
   height: 1.5rem;
   width: 0.5rem;
   background-color: black;
-}
-.clock__stationOverviewIndicator {
-  height: 100%;
-  width: 0;
-  border: 2px solid red;
-  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

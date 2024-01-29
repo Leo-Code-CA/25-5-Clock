@@ -57,6 +57,13 @@
         background-size: 100% 100%;
     }
 
+    &__stationOverviewIndicator {
+        height: 100%;
+        width: 0;
+        border: 2px solid red;
+        position: relative;
+    }
+
     &__stationsCursorContainer {
         border: 1px solid;
         height: 5%;
@@ -68,12 +75,8 @@
         height: 1.5rem;
         width: 0.5rem;
         background-color: black;
+        position: relative;
+        cursor: pointer;
     }
 
-    &__stationOverviewIndicator {
-        height: 100%;
-        width: 0;
-        border: 2px solid red;
-        margin: 0 auto;
-    }
 }

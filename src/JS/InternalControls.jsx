@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-export default function InternalControls({clockOn, setClockOn, timerOn, setTimerOn, session, setSession}) {
-
+export default function InternalControls({ clockOn, setClockOn, timerOn, setTimerOn, timerBreak, setTimerBreak, timerSession, setTimerSession}) {
 
 
     function handleSwitch(current, setCurrent, other, setOther) {
@@ -15,20 +14,34 @@ export default function InternalControls({clockOn, setClockOn, timerOn, setTimer
         }
     }
 
-    function handleSessionChange(change, type) {
+
+    function handleSessionChange(change, type, setType) {
+
+        let minutes = type.initial.slice(0, 2);
+        // let seconds = type.initial.slice(3, 5);
+
+        // console.log(minutes, seconds)
 
         if (change === "increase") {
 
-            session[type] !== 59 ? setSession({...session, [type]: session[type] + 1}) : null;
+            minutes++;
 
- 
+            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+
+            type.initial !== "59:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
+            
+
         } else if (change === "decrease") {
 
-            session[type] !== 1 ? setSession({...session, [type]: session[type] - 1}) : null;
+            minutes--;
 
+            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+
+            type.initial !== "01:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
         }
-        
+
     }
+
 
     return (
         <div className="clock__internalControls">
@@ -43,17 +56,17 @@ export default function InternalControls({clockOn, setClockOn, timerOn, setTimer
             <div className="clock__lengthContainer">
                 <Length
                 timerOn={timerOn}
-                // display={session.initialTimer}
-                decreaseTime={() => handleSessionChange("decrease", "initialTimer")}
-                increaseTime={() => handleSessionChange("increase", "initialTimer")}
+                display={timerSession.initial}
+                decreaseTime={() => handleSessionChange("decrease", timerSession, setTimerSession)}
+                increaseTime={() => handleSessionChange("increase", timerSession, setTimerSession)}
                 >
                     Session
                 </Length>
                 <Length
                 timerOn={timerOn}
-                // display={session.initialBreak}
-                decreaseTime={() => handleSessionChange("decrease", "initialBreak")}
-                increaseTime={() => handleSessionChange("increase", "initialBreak")}
+                display={timerBreak.initial}
+                decreaseTime={() => handleSessionChange("decrease", timerBreak, setTimerBreak)}
+                increaseTime={() => handleSessionChange("increase", timerBreak, setTimerBreak)}
                 >
                     Break
                 </Length>
@@ -91,7 +104,7 @@ function Length({ children, timerOn, display, decreaseTime, increaseTime }) {
                 <div 
                     id={children === "Session" ? "session-length" : "break-length" }
                     className="clock__smallScreen">
-                        {/* {timerOn && display} */}
+                        {timerOn && display}
                 </div>
                 <button
                 onClick={increaseTime}

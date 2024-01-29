@@ -10,18 +10,14 @@ export default function RadioClock() {
     const [start, setStart] = useState(true);
     const [clockOn, setClockOn] = useState(false);
     const [timerOn, setTimerOn] = useState(false);
-    // const [session, setSession] = useState({initialTimer: "00:10", initialBreak: "00:05", currentTimer: "00:10", currentBreak: "00:05", ongoing: ""})
-    const [timerBreak, setTimerBreak] = useState({initial: "00:05", current: "00:05", ongoing: false});
-    const [timerSession, setTimerSession] = useState({initial: "00:10", current: "00:10", ongoing: true});
-
+    const [timerBreak, setTimerBreak] = useState({initial: "02:00", current: "02:00", ongoing: false});
+    const [timerSession, setTimerSession] = useState({initial: "03:00", current: "03:00", ongoing: true});
 
     return (
         <div className="clock">
 
             <ExternalControls 
             timerOn={timerOn}
-            // setSession={setSession}
-            // session={session}
             start={start}
             setStart={setStart}
             timerBreak={timerBreak}
@@ -31,12 +27,15 @@ export default function RadioClock() {
             />
 
             <InternalControls 
-            setClockOn={setClockOn} 
             clockOn={clockOn}
+            setClockOn={setClockOn}
             timerOn={timerOn}
-            setTimerOn={setTimerOn}/>
-            {/* session={session}
-            setSession={setSession} */}
+            setTimerOn={setTimerOn}
+            timerBreak={timerBreak}
+            setTimerBreak={setTimerBreak}
+            timerSession={timerSession}
+            setTimerSession={setTimerSession}
+            />
 
             <div className="clock__screenAndStations">
                 
@@ -47,8 +46,6 @@ export default function RadioClock() {
                 timerOn={timerOn}
                 timerSession={timerSession}
                 timerBreak={timerBreak}
-                // session={session}
-                // setSession={setSession}
                 start={start}
                 />
 

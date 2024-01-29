@@ -11,8 +11,8 @@ export default function RadioClock() {
     const [clockOn, setClockOn] = useState(false);
     const [timerOn, setTimerOn] = useState(false);
     // const [session, setSession] = useState({initialTimer: "00:10", initialBreak: "00:05", currentTimer: "00:10", currentBreak: "00:05", ongoing: ""})
-    const [timerBreak, setTimerBreak] = useState({initial: "00:10", current: ""});
-    const [timerSession, setTimerSession] = useState({initial: "00:05", current: ""});
+    const [timerBreak, setTimerBreak] = useState({initial: "00:05", current: "00:05", ongoing: false});
+    const [timerSession, setTimerSession] = useState({initial: "00:10", current: "00:10", ongoing: true});
 
 
     return (

@@ -1,16 +1,16 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import Playlist from '../assets/playlist.mp3';
 import Radio from '../assets/radio.mp3';
 
 export default function Stations() {
 
-    // const [changeStation, setChangeStation] = useState(true);
     const cursorRef = useRef(null);
     const sliderRef = useRef(null);
     const indicatorRef = useRef(null);
     const playlistRef = useRef(null);
     const radioRef = useRef(null);
-
+    const cursorPosition = useRef(null);
+    const sliderRightEdge = useRef(null);
 
     function handleSlide(e) {
 
@@ -26,25 +26,20 @@ export default function Stations() {
             playlistRef.current.pause();
             radioRef.current.play();
 
-
-            let newLeft = e.clientX - shiftX - sliderRef.current.getBoundingClientRect().left;
-            let rightEdge = sliderRef.current.clientWidth - cursorRef.current.clientWidth;
+            cursorPosition.current = e.clientX - shiftX - sliderRef.current.getBoundingClientRect().left;
+            sliderRightEdge.current = sliderRef.current.clientWidth - cursorRef.current.clientWidth;
             const playlistDuration = playlistRef.current.duration;
 
-            newLeft < 0 ? newLeft = 0 : null;
-            newLeft > rightEdge ? newLeft = rightEdge : null;
+            cursorPosition.current < 0 ? cursorPosition.current = 0 : null;
+            cursorPosition.current > sliderRightEdge.current ? cursorPosition.current = sliderRightEdge.current : null;
 
-            cursorRef.current.style.left = newLeft + "px";
-            indicatorRef.current.style.left = newLeft + 2 + "px";
+            cursorRef.current.style.left = cursorPosition.current + "px";
+            indicatorRef.current.style.left = cursorPosition.current + 2 + "px";
 
-            const currentCursorPosition = newLeft / rightEdge * 100;
+            const currentCursorPosition = cursorPosition.current / sliderRightEdge.current * 100;
             const currentPlaylistTime = currentCursorPosition / 100 * playlistDuration;
 
             playlistRef.current.currentTime = currentPlaylistTime;
-
-
-            newLeft === 0 || newLeft === rightEdge ? playlistRef.current.pause() : null;
-
 
         }
 
@@ -54,15 +49,13 @@ export default function Stations() {
             document.removeEventListener("mouseup", handleMouseUp);
 
             radioRef.current.pause();
-            playlistRef.current.play();
-            // fix the fact that it does not stop at the beginning
+
+            cursorPosition.current === 0 || cursorPosition.current === sliderRightEdge.current ? playlistRef.current.pause() : playlistRef.current.play();
     
         }
 
     }
 
-
- 
 
     return (
         <div className="clock__stationsContainer">

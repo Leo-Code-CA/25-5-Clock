@@ -1,13 +1,66 @@
 import { useRef } from "react";
+import Click from '../assets/button_click.mp3';
+import Beep from '../assets/alarm.mp3';
 
 export default function ExternalControls({ setStart, start, timerBreak, setTimerBreak, timerSession, setTimerSession, timerOn }) {
-    
+
     const timerIntervalID = useRef(null);
+    const clickRef = useRef(null);
+    const beepRef = useRef(null);
+    const resetRef = useRef(null);
+    const playRef = useRef(null);
+    const animation = useRef(null);
+
+    // console.log(start)
+
+    function handleAnimation(elem, type) {
+    
+        const keyFrame = new KeyframeEffect(elem, [
+            {transform: "translateY(0)"},
+            {transform: "translateY(75%)"}
+            ],
+            {
+                duration: 500,
+                iteration: 1,
+                fill: type === "backwardsOnly" ? "backwards" : "forwards"
+            }
+        )
+
+        animation.current = new Animation(keyFrame);
+
+        if (type === "forwardsOnly") {
+
+            animation.current.play();
+            setTimeout(() => {clickRef.current.play()}, 500);
+
+        } else if (type === "backwardsOnly") {
+
+            clickRef.current.play();
+            animation.current.reverse();
+
+        } else {
+
+            animation.current.play();
+            setTimeout(() => {
+                clickRef.current.play();
+                animation.current.reverse();
+            }, 500)
+
+        }
+
+        
+
+    }
+    
 
     function handleReset() {
 
+        handleAnimation(resetRef.current)
+
+        !start ? setTimeout(() => {handleAnimation(playRef.current, "backwardsOnly")}, 1000) : null;
+
         clearInterval(timerIntervalID.current);
-        setStart(false);
+        setStart(true);
         setTimerSession({initial: "25:00", current: "25:00", ongoing: "true"});
         setTimerBreak({initial: "05:00", current: "05:00", ongoing: "false"});
 
@@ -20,6 +73,8 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
 
         if (start) {
 
+            handleAnimation(playRef.current, "forwardsOnly");
+
             const sessionT = timerSession.initial;
             const breakT = timerBreak.initial;
             let inProgress;
@@ -31,6 +86,7 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
                         
                 if (seconds === "00" && minutes === "00") {
 
+                    beepRef.current.play();
 
                     if (inProgress === sessionT) {
                         inProgress = breakT;
@@ -73,31 +129,46 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
                 
             
             }, 1000)
+
+        } else {
+            handleAnimation(playRef.current, "backwardsOnly");
         }
+
     }
 
 
     return (
         <div className="clock__externalControls">
-            <Button trigger={handleStartStop}>
+            <Button 
+            trigger={handleStartStop} 
+            click={clickRef}
+            animate={playRef}
+            timerOn={timerOn}>
                 START
             </Button>
-            <Button trigger={handleReset}>
+            <Button 
+            trigger={handleReset} 
+            click={clickRef}
+            animate={resetRef}
+            timerOn={timerOn}>
                 RESET
             </Button>
+            <audio src={Beep} ref={beepRef}></audio>
         </div>
     )
 }
 
-function Button({ children, trigger }) {
+function Button({ children, trigger, click, animate, timerOn }) {
 
     return (
         <>
             <button
-            onClick={trigger}
-            id={children === "START" ? "start_stop" : "reset"}>
+            onClick={timerOn ? trigger : null}
+            id={children === "START" ? "start_stop" : "reset"}
+            ref={animate}>
                 {children}
             </button>
+            <audio src={Click} ref={click}></audio>
         </>
     )
 }

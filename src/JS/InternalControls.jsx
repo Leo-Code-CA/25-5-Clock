@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
-export default function InternalControls({ clockOn, setClockOn, timerOn, setTimerOn, timerBreak, setTimerBreak, timerSession, setTimerSession}) {
+export default function InternalControls({ clockOn, setClockOn, timerOn, setTimerOn, timerBreak, setTimerBreak, timerSession, setTimerSession, start }) {
 
 
     function handleSwitch(current, setCurrent, other, setOther) {
@@ -17,10 +17,11 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
 
     function handleSessionChange(change, type, setType) {
 
-        let minutes = type.initial.slice(0, 2);
-        // let seconds = type.initial.slice(3, 5);
+        console.log(start)
 
-        // console.log(minutes, seconds)
+        if (start) {
+
+            let minutes = type.initial.slice(0, 2);
 
         if (change === "increase") {
 
@@ -38,6 +39,9 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
             minutes.toString().length === 1 ? minutes = "0" + minutes : null;
 
             type.initial !== "01:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
+        }
+
+            
         }
 
     }
@@ -67,6 +71,7 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
                 display={timerBreak.initial}
                 decreaseTime={() => handleSessionChange("decrease", timerBreak, setTimerBreak)}
                 increaseTime={() => handleSessionChange("increase", timerBreak, setTimerBreak)}
+                start={start}
                 >
                     Break
                 </Length>
@@ -95,7 +100,8 @@ function Switch({ children, onSwitch, turnedOn }) {
     )
 };
 
-function Length({ children, timerOn, display, decreaseTime, increaseTime }) {
+function Length({ children, timerOn, display, decreaseTime, increaseTime, start }) {
+
 
     return (
         <div className="clock__length">
@@ -110,13 +116,13 @@ function Length({ children, timerOn, display, decreaseTime, increaseTime }) {
                 onClick={increaseTime}
                 id={children === "Session" ? "session-increment" : "break-increment" }
                 >
-                    <FontAwesomeIcon icon={icon({name: 'up-long'})} />
+                    <FontAwesomeIcon icon={icon({name: 'up-long'})} style={{color: '#FFF'}}/>
                 </button>
                 <button
                 onClick={decreaseTime}
                 id={children === "Session" ? "session-decrement" : "break-decrement" }
                 >
-                    <FontAwesomeIcon icon={icon({name: 'up-long'})} rotation={180} />
+                    <FontAwesomeIcon icon={icon({name: 'up-long'})} rotation={180} style={{color: '#FFF'}}/>
                 </button>
             </div>
         </div>

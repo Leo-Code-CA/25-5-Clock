@@ -1,3 +1,5 @@
+@use 'global';
+
 .clock {
 
     &__externalControls {
@@ -5,17 +7,45 @@
         position: absolute;
         top: 0;
         left: 95%;
-        width: 25%;
-        height: 10%;
+        width: 20%;
+        height: 8%;
         transform: translate(-95%, -100%);
         display: flex;
         justify-content: space-between;
 
         button {
             border: 1px solid;
+            border-bottom: none;
             background: none;
             width: 45%;
             cursor: pointer;
+            background-color: global.$light-gray;
+            font-size: 0.8rem;
+            border-radius: 0.2rem 0.2rem 0 0;
         }
+    }
+
+    &__antenna {
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 700px solid;
+        position: absolute;
+        top: -117%;
+        left: 45%;
+        transform: rotate(-110deg);
+        transform-origin: left;
+        z-index: -1;
+
+    }
+
+    &__antenna-end {
+        position: absolute;
+        top: -58%;
+        left: 81%;
+        width: 3rem;
+        height: 0.5rem;
+        background-color: black;
+        border-radius: 20%;
+        transform: rotate(-20deg);
     }
 }

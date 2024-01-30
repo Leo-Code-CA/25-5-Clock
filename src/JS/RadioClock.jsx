@@ -10,11 +10,14 @@ export default function RadioClock() {
     const [start, setStart] = useState(true);
     const [clockOn, setClockOn] = useState(false);
     const [timerOn, setTimerOn] = useState(false);
-    const [timerBreak, setTimerBreak] = useState({initial: "05:00", current: "05:00", ongoing: false});
-    const [timerSession, setTimerSession] = useState({initial: "25:00", current: "25:00", ongoing: true});
+    const [timerBreak, setTimerBreak] = useState({initial: "01:00", current: "01:00", ongoing: false});
+    const [timerSession, setTimerSession] = useState({initial: "02:00", current: "02:00", ongoing: true});
 
     return (
         <div className="clock">
+
+            <div className="clock__antenna"></div>
+            <div className="clock__antenna-end"></div>
 
             <ExternalControls 
             timerOn={timerOn}
@@ -26,31 +29,40 @@ export default function RadioClock() {
             setTimerSession={setTimerSession}
             />
 
-            <InternalControls 
-            clockOn={clockOn}
-            setClockOn={setClockOn}
-            timerOn={timerOn}
-            setTimerOn={setTimerOn}
-            timerBreak={timerBreak}
-            setTimerBreak={setTimerBreak}
-            timerSession={timerSession}
-            setTimerSession={setTimerSession}
-            />
+            <div className="clock__bg">
 
-            <div className="clock__screenAndStations">
-                
-                <MainScreen
-                time={time}
-                setTime={setTime} 
+                <InternalControls 
                 clockOn={clockOn}
+                setClockOn={setClockOn}
                 timerOn={timerOn}
-                timerSession={timerSession}
+                setTimerOn={setTimerOn}
                 timerBreak={timerBreak}
+                setTimerBreak={setTimerBreak}
+                timerSession={timerSession}
+                setTimerSession={setTimerSession}
                 start={start}
                 />
 
-                <Stations />
+                <div className="clock__screenAndStations">
+                    
+                    <MainScreen
+                    time={time}
+                    setTime={setTime} 
+                    clockOn={clockOn}
+                    timerOn={timerOn}
+                    timerSession={timerSession}
+                    timerBreak={timerBreak}
+                    start={start}
+                    />
+
+                    <Stations />
+
+                    <div className="clock__speakers"></div>
+
+                </div>
+
             </div>
+
         </div>
     )
 }

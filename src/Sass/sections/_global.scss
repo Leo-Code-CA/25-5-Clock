@@ -1,3 +1,15 @@
+// IMPORTS
+@import url('https://fonts.cdnfonts.com/css/digital-7-mono');
+@import url('https://fonts.cdnfonts.com/css/rogan');
+
+// VARIABLES
+$digital-font: 'Digital-7', sans-serif;
+$body-font: 'rogan', sans-serif;
+
+$light-gray: #d7d7d7;
+$dark-gray: #353535;
+
+
 // GLOBAL APP SETTINGS
 *, *::before, *::after {
     box-sizing: border-box;
@@ -16,6 +28,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    overflow: hidden;
+    font-family: $body-font;
 }
 
 button {
@@ -24,14 +38,21 @@ button {
 
 // GLOBAL RADIO CLOCK SETTINGS
 .clock {
-    border: 1px solid;
+
     position: relative;
     height: 55%;
     aspect-ratio: 2 / 1;
     margin-bottom: 3rem;
-    border-radius: 1rem;
-    display: flex;
+
+    &__bg {
+        width: 100%;
+        height: 100%;
+        border: 1px solid;
+        display: flex;
+        background: linear-gradient(147deg, $light-gray 0%, $dark-gray 74%), $light-gray;
+        border-radius: 1rem;
+        position: relative;
+        z-index: 3;
+    }
+
 }
-
-// VARIABLES
-

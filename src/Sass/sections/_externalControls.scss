@@ -34,14 +34,13 @@
         left: 45%;
         transform: rotate(-110deg);
         transform-origin: left;
-        z-index: -1;
 
     }
 
     &__antenna-end {
         position: absolute;
-        top: -58%;
-        left: 81%;
+        top: -58.5%;
+        left: 82%;
         width: 3rem;
         height: 0.5rem;
         background-color: black;

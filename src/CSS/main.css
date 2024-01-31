@@ -19,6 +19,8 @@ main {
   align-items: flex-end;
   overflow: hidden;
   font-family: "rogan", sans-serif;
+  background: url("../assets/pageBg.jpg");
+  background-size: cover;
 }
 
 button {
@@ -71,12 +73,11 @@ button {
   left: 45%;
   transform: rotate(-110deg);
   transform-origin: left;
-  z-index: -1;
 }
 .clock__antenna-end {
   position: absolute;
-  top: -58%;
-  left: 81%;
+  top: -58.5%;
+  left: 82%;
   width: 3rem;
   height: 0.5rem;
   background-color: black;
@@ -129,10 +130,13 @@ button {
   border: none;
   background-color: #353535;
 }
+.clock__on:hover {
+  background-color: rgba(53, 53, 53, 0.8);
+}
 .clock__onOffBtn {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.5rem;
   flex-grow: 1;
 }
 .clock__lengthContainer {
@@ -173,7 +177,6 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  padding-top: 0.3rem;
   font-family: "Digital-7", sans-serif;
   border-radius: 0.2rem;
 }
@@ -200,9 +203,19 @@ button {
   width: 100%;
   height: 70%;
   display: flex;
-  font-size: 3.5rem;
+  font-size: 4.5rem;
   justify-content: flex-end;
   align-items: end;
+  letter-spacing: 0.1rem;
+}
+.clock__time {
+  font-size: 5.5rem;
+}
+.clock__time span {
+  font-size: 2.5rem;
+  display: inline-block;
+  min-width: 50px;
+  padding-left: 0.2rem;
 }
 .clock__secondaryDisplay {
   width: 100%;
@@ -237,6 +250,7 @@ button {
   height: 5%;
   display: flex;
   align-items: center;
+  background-color: white;
 }
 .clock__stationsCursor {
   height: 1.5rem;

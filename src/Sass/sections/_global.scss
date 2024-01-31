@@ -30,6 +30,8 @@ main {
     align-items: flex-end;
     overflow: hidden;
     font-family: $body-font;
+    background: url('../assets/pageBg.jpg');
+    background-size: cover;
 }
 
 button {

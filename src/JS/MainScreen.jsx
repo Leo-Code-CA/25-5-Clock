@@ -11,13 +11,13 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
             clockIntervalID.current = setInterval(() => {
                 const date = new Date();
                 let hours = date.getHours();
-                const minutes = date.getMinutes();
-                const seconds = date.getSeconds();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
 
                 switch (hours) {
                     case 13:
                         hours = "01";
-        break;                        
+                    break;                        
                     case 14:
                         hours = "02";
                         break;
@@ -53,9 +53,13 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
                         break;
                     default:
                         throw new Error("time not reconized");
-                }       
+                }
+                
+                hours.toString().length === 1 ? hours = "0" + hours : null;
+                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+                seconds.toString().length === 1 ? seconds = "0" + seconds : null;
 
-                setTime(`${hours}:${minutes}:${seconds}`);
+                setTime(`${hours}:${minutes}${seconds}`);
                 
             }, 1000);
 
@@ -73,7 +77,7 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
             </div>
             <div className="clock__mainDisplay" id={timerOn ? "time-left" : undefined}>
                 {timerOn ? (timerBreak.ongoing === true ? timerBreak.current : timerSession.current) 
-                : clockOn ? time
+                : clockOn ? <div className="clock__time">{time.slice(0, 5)}<span>{time.slice(5)}</span></div>
                 : null}
             </div>
         </div>

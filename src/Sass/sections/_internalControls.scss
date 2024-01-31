@@ -58,6 +58,10 @@
         border: none;
         background-color: global.$dark-gray;
 
+        &:hover {
+            background-color: rgba(global.$dark-gray, 0.8);
+        }
+
         // &--on {
         //     background-color: goldenrod;
         // }
@@ -71,7 +75,7 @@
     &__onOffBtn {
         display: flex;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.5rem;
         flex-grow: 1;
     }
 
@@ -120,7 +124,6 @@
         justify-content: center;
         align-items: center;
         font-size: 2rem;
-        padding-top: 0.3rem;
         font-family: global.$digital-font;
         border-radius: 0.2rem;
     }

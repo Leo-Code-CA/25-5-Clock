@@ -2,6 +2,7 @@ import ExternalControls from "./ExternalControls.jsx";
 import InternalControls from "./InternalControls.jsx";
 import MainScreen from "./MainScreen.jsx";
 import Stations from "./Stations.jsx";
+import Antenna from './../assets/antenna.svg';
 import { useState } from 'react';
 
 export default function RadioClock() {
@@ -16,8 +17,7 @@ export default function RadioClock() {
     return (
         <div className="clock">
 
-            <div className="clock__antenna"></div>
-            <div className="clock__antenna-end"></div>
+            <img src={Antenna} alt="radio antenna illustration" className="clock__extrernalAntenna"/>
 
             <ExternalControls 
             timerOn={timerOn}
@@ -52,7 +52,6 @@ export default function RadioClock() {
                     timerOn={timerOn}
                     timerSession={timerSession}
                     timerBreak={timerBreak}
-                    start={start}
                     />
 
                     <Stations />
@@ -65,4 +64,4 @@ export default function RadioClock() {
 
         </div>
     )
-}
+};

@@ -14,13 +14,20 @@ body {
 main {
   height: 100%;
   width: 100%;
+  min-width: 21.875rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   overflow: hidden;
   font-family: "rogan", sans-serif;
-  background: url("../assets/pageBg.jpg");
+  background: url("./../assets/pageBg.jpg");
   background-size: cover;
+  background-position: 50% 50%;
+}
+@media screen and (max-width: 36rem) {
+  main {
+    align-items: center;
+  }
 }
 
 button {
@@ -36,12 +43,36 @@ button {
 .clock__bg {
   width: 100%;
   height: 100%;
-  border: 1px solid;
+  border: 0.063rem solid;
   display: flex;
   background: linear-gradient(147deg, #d7d7d7 0%, #353535 74%), #d7d7d7;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   position: relative;
   z-index: 3;
+}
+@media screen and (max-width: 36rem) {
+  .clock__bg {
+    border-radius: 0.5rem;
+  }
+}
+@media screen and (max-width: 62rem) {
+  .clock {
+    height: 45%;
+    margin-bottom: 6rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock {
+    height: 35%;
+    margin-bottom: 10rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock {
+    height: 25%;
+    max-width: 95%;
+    margin-bottom: 0;
+  }
 }
 
 .clock__externalControls {
@@ -55,34 +86,35 @@ button {
   justify-content: space-between;
 }
 .clock__externalControls button {
-  border: 1px solid;
+  border: 0.063rem solid;
   border-bottom: none;
   background: none;
   width: 45%;
-  cursor: pointer;
   background-color: #d7d7d7;
   font-size: 0.8rem;
   border-radius: 0.2rem 0.2rem 0 0;
 }
-.clock__antenna {
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 700px solid;
-  position: absolute;
-  top: -117%;
-  left: 45%;
-  transform: rotate(-110deg);
-  transform-origin: left;
+@media screen and (max-width: 62rem) {
+  .clock__externalControls button {
+    font-size: 0.7rem;
+  }
 }
-.clock__antenna-end {
+@media screen and (max-width: 48rem) {
+  .clock__externalControls button {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__externalControls button {
+    font-size: 0.5rem;
+  }
+}
+.clock__extrernalAntenna {
   position: absolute;
-  top: -58.5%;
-  left: 82%;
-  width: 3rem;
-  height: 0.5rem;
-  background-color: black;
-  border-radius: 20%;
-  transform: rotate(-20deg);
+  bottom: 97%;
+  transform: rotate(70deg);
+  transform-origin: bottom;
+  height: 170%;
 }
 
 .clock__internalControls {
@@ -93,12 +125,28 @@ button {
   flex-direction: column;
   gap: 0.5rem;
 }
+@media screen and (max-width: 48rem) {
+  .clock__internalControls {
+    gap: 0;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__internalControls {
+    padding: 0.2rem 0 0.2rem 0.2rem;
+  }
+}
 .clock__switchContainer {
   display: flex;
   width: 100%;
   height: 25%;
   gap: 1rem;
   padding: 0.5rem 0;
+}
+@media screen and (max-width: 36rem) {
+  .clock__switchContainer {
+    padding: 0.2rem 0;
+    gap: 0.5rem;
+  }
 }
 .clock__switch {
   width: 50%;
@@ -108,8 +156,23 @@ button {
 .clock__switch h2 {
   text-align: center;
 }
+@media screen and (max-width: 62rem) {
+  .clock__switch h2 {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__switch h2 {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__switch h2 {
+    font-size: 0.7rem;
+  }
+}
 .clock__onContainer {
-  border: 1px solid;
+  border: 0.063rem solid;
   flex-grow: 1;
   height: 50%;
   display: flex;
@@ -123,10 +186,19 @@ button {
 .clock__onContainer--off {
   justify-content: flex-end;
 }
+@media screen and (max-width: 62rem) {
+  .clock__onContainer {
+    height: 60%;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__onContainer {
+    height: 55%;
+  }
+}
 .clock__on {
   width: 50%;
   height: 100%;
-  cursor: pointer;
   border: none;
   background-color: #353535;
 }
@@ -139,6 +211,22 @@ button {
   gap: 0.5rem;
   flex-grow: 1;
 }
+@media screen and (max-width: 62rem) {
+  .clock__onOffBtn {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__onOffBtn {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__onOffBtn {
+    font-size: 0.6rem;
+    gap: 0.2rem;
+  }
+}
 .clock__lengthContainer {
   display: flex;
   flex-direction: column;
@@ -146,11 +234,36 @@ button {
   height: 75%;
   gap: 1rem;
 }
+@media screen and (max-width: 48rem) {
+  .clock__lengthContainer {
+    gap: 0.3rem;
+  }
+}
 .clock__length {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+}
+@media screen and (max-width: 48rem) {
+  .clock__length {
+    gap: 0.2rem;
+  }
+}
+@media screen and (max-width: 62rem) {
+  .clock__length h3 {
+    font-size: 1.1rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__length h3 {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__length h3 {
+    font-size: 0.7rem;
+  }
 }
 .clock__smallScreenContainer {
   flex-grow: 1;
@@ -160,13 +273,48 @@ button {
   justify-content: center;
   gap: 0.5rem;
 }
+@media screen and (max-width: 36rem) {
+  .clock__smallScreenContainer {
+    gap: 0.2rem;
+  }
+}
 .clock__smallScreenContainer button {
   background-color: transparent;
-  border: 1px solid;
+  border: 0.063rem solid;
   width: 2rem;
   height: 2rem;
   border-radius: 0.2rem;
   background-color: #353535;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (max-width: 62rem) {
+  .clock__smallScreenContainer button {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .clock__smallScreenContainer button svg {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__smallScreenContainer button {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .clock__smallScreenContainer button svg {
+    font-size: 0.5rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__smallScreenContainer button {
+    width: 1rem;
+    height: 1rem;
+  }
+  .clock__smallScreenContainer button svg {
+    font-size: 0.4rem;
+  }
 }
 .clock__smallScreen {
   width: 100%;
@@ -180,6 +328,21 @@ button {
   font-family: "Digital-7", sans-serif;
   border-radius: 0.2rem;
 }
+@media screen and (max-width: 62rem) {
+  .clock__smallScreen {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__smallScreen {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__smallScreen {
+    font-size: 0.8rem;
+  }
+}
 
 .clock__screenAndStations {
   height: 100%;
@@ -187,6 +350,11 @@ button {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+}
+@media screen and (max-width: 36rem) {
+  .clock__screenAndStations {
+    padding: 0.2rem;
+  }
 }
 .clock__mainScreen {
   width: 100%;
@@ -199,6 +367,11 @@ button {
   font-family: "Digital-7", sans-serif;
   border-radius: 0.2rem;
 }
+@media screen and (max-width: 36rem) {
+  .clock__mainScreen {
+    padding: 0.2rem 0.2rem 0;
+  }
+}
 .clock__mainDisplay {
   width: 100%;
   height: 70%;
@@ -208,20 +381,83 @@ button {
   align-items: end;
   letter-spacing: 0.1rem;
 }
+@media screen and (max-width: 62rem) {
+  .clock__mainDisplay {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__mainDisplay {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__mainDisplay {
+    font-size: 2rem;
+  }
+}
 .clock__time {
   font-size: 5.5rem;
+}
+@media screen and (max-width: 62rem) {
+  .clock__time {
+    font-size: 4rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__time {
+    font-size: 3rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__time {
+    font-size: 2.2rem;
+  }
 }
 .clock__time span {
   font-size: 2.5rem;
   display: inline-block;
-  min-width: 50px;
+  min-width: 3.125rem;
   padding-left: 0.2rem;
+}
+@media screen and (max-width: 62rem) {
+  .clock__time span {
+    font-size: 1.5rem;
+    min-width: 1.875rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__time span {
+    font-size: 1rem;
+    min-width: 1.563rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__time span {
+    font-size: 0.8rem;
+    min-width: 1.25rem;
+  }
 }
 .clock__secondaryDisplay {
   width: 100%;
   height: 30%;
   text-align: right;
   font-size: 1.5rem;
+}
+@media screen and (max-width: 62rem) {
+  .clock__secondaryDisplay {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 48rem) {
+  .clock__secondaryDisplay {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__secondaryDisplay {
+    font-size: 0.8rem;
+  }
 }
 .clock__stationsContainer {
   width: 100%;
@@ -231,8 +467,18 @@ button {
   justify-content: center;
   gap: 1.5rem;
 }
+@media screen and (max-width: 48rem) {
+  .clock__stationsContainer {
+    gap: 1rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__stationsContainer {
+    gap: 0.5rem;
+  }
+}
 .clock__stationsOverview {
-  border: 1px solid;
+  border: 0.063rem solid;
   height: 40%;
   background-image: url("./../assets/radio_stations_illustration.jpg");
   background-size: 100% 100%;
@@ -242,11 +488,16 @@ button {
 .clock__stationOverviewIndicator {
   height: 100%;
   width: 0;
-  border: 2px solid red;
+  border: 0.125rem solid red;
   position: relative;
 }
+@media screen and (max-width: 36rem) {
+  .clock__stationOverviewIndicator {
+    border: 0.063rem solid red;
+  }
+}
 .clock__stationsCursorContainer {
-  border: 1px solid;
+  border: 0.063rem solid;
   height: 5%;
   display: flex;
   align-items: center;
@@ -260,11 +511,24 @@ button {
   cursor: pointer;
   border-radius: 0.2rem;
 }
+@media screen and (max-width: 62rem) {
+  .clock__stationsCursor {
+    height: 1.2rem;
+    width: 0.4rem;
+    border-radius: 0.1rem;
+  }
+}
+@media screen and (max-width: 36rem) {
+  .clock__stationsCursor {
+    height: 0.8rem;
+    width: 0.3rem;
+  }
+}
 .clock__speakers {
   height: 40%;
   width: 100%;
-  border: 1px solid;
-  background-image: url("../assets/speakers_bg.jpg");
+  border: 0.063rem solid;
+  background-image: url("./../assets/speakers_bg.jpg");
   background-size: cover;
   border-radius: 0.2rem;
   overflow: hidden;

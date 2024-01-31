@@ -3,7 +3,6 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 
 export default function InternalControls({ clockOn, setClockOn, timerOn, setTimerOn, timerBreak, setTimerBreak, timerSession, setTimerSession, start }) {
 
-
     function handleSwitch(current, setCurrent, other, setOther) {
 
         if (!current && other) {
@@ -12,39 +11,33 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
         } else {
             setCurrent(c => !c)
         }
-    }
-
+    };
 
     function handleSessionChange(change, type, setType) {
-
-        console.log(start)
 
         if (start) {
 
             let minutes = type.initial.slice(0, 2);
 
-        if (change === "increase") {
+            if (change === "increase") {
 
-            minutes++;
+                minutes++;
 
-            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
 
-            type.initial !== "59:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
-            
+                type.initial !== "60:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
+                
 
-        } else if (change === "decrease") {
+            } else if (change === "decrease") {
 
-            minutes--;
+                minutes--;
 
-            minutes.toString().length === 1 ? minutes = "0" + minutes : null;
+                minutes.toString().length === 1 ? minutes = "0" + minutes : null;
 
-            type.initial !== "01:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
+                type.initial !== "01:00" ? setType({...type, initial: `${minutes}:00`, current: `${minutes}:00`}) : null;
+            }
         }
-
-            
-        }
-
-    }
+    };
 
 
     return (
@@ -52,10 +45,14 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
             <div className="clock__switchContainer">
                 <Switch 
                 turnedOn={clockOn} 
-                onSwitch={() => handleSwitch(clockOn, setClockOn, timerOn, setTimerOn)}>CLOCK</Switch>
+                onSwitch={() => handleSwitch(clockOn, setClockOn, timerOn, setTimerOn)}>
+                    CLOCK
+                </Switch>
                 <Switch 
                 turnedOn={timerOn} 
-                onSwitch={() => handleSwitch(timerOn, setTimerOn, clockOn, setClockOn)}>TIMER</Switch>
+                onSwitch={() => handleSwitch(timerOn, setTimerOn, clockOn, setClockOn)}>
+                    TIMER
+                </Switch>
             </div>
             <div className="clock__lengthContainer">
                 <Length
@@ -100,8 +97,7 @@ function Switch({ children, onSwitch, turnedOn }) {
     )
 };
 
-function Length({ children, timerOn, display, decreaseTime, increaseTime, start }) {
-
+function Length({ children, timerOn, display, decreaseTime, increaseTime }) {
 
     return (
         <div className="clock__length">
@@ -114,17 +110,15 @@ function Length({ children, timerOn, display, decreaseTime, increaseTime, start 
                 </div>
                 <button
                 onClick={increaseTime}
-                id={children === "Session" ? "session-increment" : "break-increment" }
-                >
+                id={children === "Session" ? "session-increment" : "break-increment" }>
                     <FontAwesomeIcon icon={icon({name: 'up-long'})} style={{color: '#FFF'}}/>
                 </button>
                 <button
                 onClick={decreaseTime}
-                id={children === "Session" ? "session-decrement" : "break-decrement" }
-                >
+                id={children === "Session" ? "session-decrement" : "break-decrement" }>
                     <FontAwesomeIcon icon={icon({name: 'up-long'})} rotation={180} style={{color: '#FFF'}}/>
                 </button>
             </div>
         </div>
     )
-}
+};

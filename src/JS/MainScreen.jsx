@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function MainScreen({ clockOn, timerOn, time, setTime, start, timerBreak, timerSession }) {
+export default function MainScreen({ clockOn, timerOn, time, setTime, timerBreak, timerSession }) {
 
     const clockIntervalID = useRef(null);
 
@@ -9,6 +9,7 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
         if (clockOn) {
 
             clockIntervalID.current = setInterval(() => {
+
                 const date = new Date();
                 let hours = date.getHours();
                 let minutes = date.getMinutes();
@@ -52,7 +53,7 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
                         hours = "00";
                         break;
                     default:
-                        throw new Error("time not reconized");
+                       hours = hours;
                 }
                 
                 hours.toString().length === 1 ? hours = "0" + hours : null;
@@ -82,4 +83,4 @@ export default function MainScreen({ clockOn, timerOn, time, setTime, start, tim
             </div>
         </div>
     )
-}
+};

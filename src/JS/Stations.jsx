@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import Playlist from '../assets/playlist.mp3';
-import Radio from '../assets/radio.mp3';
+import Playlist from './../assets/playlist.mp3';
+import Radio from './../assets/radio.mp3';
 
 export default function Stations() {
 
@@ -14,19 +14,30 @@ export default function Stations() {
 
     function handleSlide(e) {
 
-        e.preventDefault();
+        let xPos;
 
-        let shiftX = e.clientX - cursorRef.current.getBoundingClientRect().left;
+        e.clientX === undefined ? xPos = e.touches[0].clientX : xPos = e.clientX;
 
-        document.addEventListener("mousemove", handleMouseMove);
+        xPos === e.clientX ? e.preventDefault() : null;
+
+        let shiftX = xPos - cursorRef.current.getBoundingClientRect().left;
+
+        document.addEventListener("mousemove", handleMove);
         document.addEventListener("mouseup", handleMouseUp);
+        document.addEventListener("touchmove", handleMove);
+        document.addEventListener("touchend", handleMouseUp);
         
-        function handleMouseMove(e) {
+        function handleMove(e) {
+
+            let xPos;
+
+            e.clientX === undefined ? xPos = e.touches[0].clientX : xPos = e.clientX;
 
             playlistRef.current.pause();
             radioRef.current.play();
 
-            cursorPosition.current = e.clientX - shiftX - sliderRef.current.getBoundingClientRect().left;
+            cursorPosition.current = xPos - shiftX - sliderRef.current.getBoundingClientRect().left;
+
             sliderRightEdge.current = sliderRef.current.clientWidth - cursorRef.current.clientWidth;
             const playlistDuration = playlistRef.current.duration;
 
@@ -45,16 +56,17 @@ export default function Stations() {
 
         function handleMouseUp() {
 
-            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mousemove", handleMove);
             document.removeEventListener("mouseup", handleMouseUp);
+            document.removeEventListener("touchmove", handleMove);
+            document.removeEventListener("touchend", handleMouseUp);
 
             radioRef.current.pause();
 
             cursorPosition.current === 0 || cursorPosition.current === sliderRightEdge.current ? playlistRef.current.pause() : playlistRef.current.play();
     
         }
-
-    }
+    };
 
 
     return (
@@ -66,10 +78,11 @@ export default function Stations() {
                 <div 
                 className="clock__stationsCursor"
                 onMouseDown={(e) => handleSlide(e)}
+                onTouchStart={(e) => handleSlide(e)}
                 ref={cursorRef}></div>
             </div>
             <audio src={Playlist} ref={playlistRef}></audio>
             <audio src={Radio} ref={radioRef}></audio>
         </div>
     )
-}
+};

@@ -10,6 +10,7 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
     const resetRef = useRef(null);
     const playRef = useRef(null);
     const animation = useRef(null);
+    const inProgress = useRef(null);
 
     function handleAnimation(elem, type) {
     
@@ -49,6 +50,8 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
     function handleReset() {
 
         handleAnimation(resetRef.current)
+        beepAudioRef.current.pause();
+        beepAudioRef.current.currentTime = 0;
 
         !start ? setTimeout(() => {handleAnimation(playRef.current, "backwardsOnly")}, 1000) : null;
 
@@ -69,10 +72,10 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
 
             const sessionT = timerSession.initial;
             const breakT = timerBreak.initial;
-            let inProgress;
-            timerSession.ongoing ? inProgress = sessionT : inProgress = breakT;
-            let minutes = inProgress === sessionT ? timerSession.current.slice(0, 2) : timerBreak.current.slice(0, 2);
-            let seconds = inProgress === sessionT ? timerSession.current.slice(3, 5) : timerBreak.current.slice(3, 5);
+            // let inProgress;
+            timerSession.ongoing ? inProgress.current = "session" : inProgress.current = "break";
+            let minutes = inProgress.current === "session" ? timerSession.current.slice(0, 2) : timerBreak.current.slice(0, 2);
+            let seconds = inProgress.current === "session" ? timerSession.current.slice(3, 5) : timerBreak.current.slice(3, 5);
 
             timerIntervalID.current = setInterval(() => {
                         
@@ -80,18 +83,23 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
 
                     beepAudioRef.current.play();
 
-                    if (inProgress === sessionT) {
-                        inProgress = breakT;
+                    console.log(timerSession, timerBreak)
+
+                    if (inProgress.current === "session") {
+                        inProgress.current = "break";
                         setTimerSession({...timerSession, current: "", ongoing: false});
                         setTimerBreak({...timerBreak, current: breakT, ongoing: true});
+
+                        minutes = breakT.slice(0, 2);
+                        seconds = breakT.slice(3, 5);
                     } else {
-                        inProgress = sessionT;
+                        inProgress.current = "session";
                         setTimerSession({...timerSession, current: sessionT, ongoing: true});
                         setTimerBreak({...timerBreak, current: "", ongoing: false});
-                    }
 
-                    minutes = inProgress.slice(0, 2);
-                    seconds = inProgress.slice(3, 5);
+                        minutes = sessionT.slice(0, 2);
+                        seconds = sessionT.slice(3, 5);
+                    }
 
                 } else if (seconds === "00") {
             
@@ -101,7 +109,7 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
                     minutes.toString().length === 1 ? minutes = "0" + minutes : null;
                     seconds.toString().length === 1 ? seconds = "0" + seconds : null;
         
-                    inProgress === sessionT ? 
+                    inProgress.current === "session" ? 
                     setTimerSession({...timerSession, current: `${minutes}:${seconds}`, ongoing: true})
                     : setTimerBreak({...timerBreak, current: `${minutes}:${seconds}`, ongoing: true});
         
@@ -112,7 +120,7 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
                     minutes.toString().length === 1 ? minutes = "0" + minutes : null;
                     seconds.toString().length === 1 ? seconds = "0" + seconds : null;
         
-                    inProgress === sessionT ? 
+                    inProgress.current === "session" ? 
                     setTimerSession({...timerSession, current: `${minutes}:${seconds}`, ongoing: true})
                     : setTimerBreak({...timerBreak, current: `${minutes}:${seconds}`, ongoing: true});
             
@@ -144,7 +152,7 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
             timerOn={timerOn}>
                 RESET
             </Button>
-            <audio src={Beep} ref={beepAudioRef}></audio>
+            <audio src={Beep} ref={beepAudioRef} id="beep"></audio>
         </div>
     )
 };

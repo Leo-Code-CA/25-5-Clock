@@ -57,7 +57,7 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
             <div className="clock__lengthContainer">
                 <Length
                 timerOn={timerOn}
-                display={timerSession.initial}
+                display={Number(timerSession.initial.slice(0, 2))}
                 decreaseTime={() => handleSessionChange("decrease", timerSession, setTimerSession)}
                 increaseTime={() => handleSessionChange("increase", timerSession, setTimerSession)}
                 >
@@ -65,7 +65,7 @@ export default function InternalControls({ clockOn, setClockOn, timerOn, setTime
                 </Length>
                 <Length
                 timerOn={timerOn}
-                display={timerBreak.initial}
+                display={Number(timerBreak.initial.slice(0, 2))}
                 decreaseTime={() => handleSessionChange("decrease", timerBreak, setTimerBreak)}
                 increaseTime={() => handleSessionChange("increase", timerBreak, setTimerBreak)}
                 start={start}

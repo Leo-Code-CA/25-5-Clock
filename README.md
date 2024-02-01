@@ -56,12 +56,12 @@ The exact requirements:
 
 ### Screenshot
 
-![25-5 Clock Overview](./src/assets/25_5_clock_result.jpg)
+![25-5 Clock Overview](./src/assets/25_5_clock_result.png)
 
 ### Links
 
 - Challenge URL: [Challenge URL](https://www.freecodecamp.org/learn/front-end-development-libraries/front-end-development-libraries-projects/build-a-25--5-clock)
-- Live Site URL: [Live site URL]()
+- Live Site URL: [Live site URL](https://leo-code-ca.github.io/25-5-Clock/)
 
 ## My process
 

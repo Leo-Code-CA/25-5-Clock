@@ -37,6 +37,7 @@ button {
 .clock {
   position: relative;
   height: 55%;
+  max-width: 95%;
   aspect-ratio: 2/1;
   margin-bottom: 3rem;
 }
@@ -70,7 +71,6 @@ button {
 @media screen and (max-width: 36rem) {
   .clock {
     height: 25%;
-    max-width: 95%;
     margin-bottom: 0;
   }
 }

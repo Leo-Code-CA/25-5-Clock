@@ -72,7 +72,6 @@ export default function ExternalControls({ setStart, start, timerBreak, setTimer
 
             const sessionT = timerSession.initial;
             const breakT = timerBreak.initial;
-            // let inProgress;
             timerSession.ongoing ? inProgress.current = "session" : inProgress.current = "break";
             let minutes = inProgress.current === "session" ? timerSession.current.slice(0, 2) : timerBreak.current.slice(0, 2);
             let seconds = inProgress.current === "session" ? timerSession.current.slice(3, 5) : timerBreak.current.slice(3, 5);
